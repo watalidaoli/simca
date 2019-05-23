@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>CSS-TIME</title>
+  <style id="s1">
+		/*表盘*/
+    #clock{
+			width:400px;
+			height:400px;
+			background: indigo;
+			border:6px solid plum;
+			border-radius:50%;
+			position:relative;
+			top:100px;
+			left:200px;
+		}
+		/*刻度*/
+		div.X1{
+			width:10px;
+			height:10px;
+			position: absolute;
+			font: 36px "chiller";
+			text-align:center;
+			line-height: 10px;
+			color:goldenrod;
+		}
+		#x12{
+			top:10px;
+			left:175px;
+			transform: rotate(0deg);
+		}
+		#x1{
+			top:35px;
+			left:290px;
+			transform: rotate(30deg);
+		}
+		#x2{
+			top:90px;
+			left:345px;
+			transform: rotate(60deg);
+		}
+		#x3{
+			top:170px;
+			left:380px;
+			transform: rotate(90deg);
+		}
+		#x4{
+			top:275px;
+			left:360px;
+			transform: rotate(120deg);
+		}
+		#x5{
+			top:350px;
+			left:295px;
+			transform: rotate(150deg);
+		}
+		#x6{
+			top:380px;
+			left:200px;
+			transform: rotate(180deg);
+		}
+		#x7{
+			top:360px;
+			left:110px;
+			transform: rotate(210deg);
+		}
+		#x8{
+			top:300px;
+			left:45px;
+			transform: rotate(240deg);
+		}
+		#x9{
+			top:200px;
+			left:10px;
+			transform: rotate(270deg);
+		}
+		#x10{
+			top:100px;
+			left:35px;
+			transform: rotate(300deg);
+		}
+		#x11{
+			top:50px;
+			left:85px;
+			transform: rotate(330deg);
+		}
+		/*指针*/
+		#hour{
+			width:14px;
+			height:80px;
+			background:maroon;
+			border-top-left-radius:25px;
+			border-top-right-radius:25px;
+			position:absolute;
+			top:120px;
+			left:193px;
+			z-index:3;
+			transform-origin:center bottom;
+			animation:turn0 86400s linear infinite;
+		}
+		#minute{
+			width:10px;
+			height:100px;
+			background:skyblue;
+			border-top-left-radius:25px;
+			border-top-right-radius:25px;
+			position:absolute;
+			top:100px;
+			left:195px;
+			z-index:2;
+			transform-origin:center bottom;
+			animation:turn1 3600s linear infinite;
+		}
+		#second{
+			width:6px;
+			height:150px;
+			background:yellowgreen;
+			border-top-left-radius:25px;
+			border-top-right-radius:25px;
+			position:absolute;
+			top:50px;
+			left:197px;
+			z-index:1;
+			transform-origin:center bottom;
+			animation:turn2 60s linear infinite;
+		}
+	/*声明动画*/
+	/*写入js*/
+	</style>
+ </head>
+ <body onload="get_time()">
+    <div id="clock">
+			<div id="hour"></div>
+	  	<div id="minute"></div>
+			<div id="second"></div>
+			<div class="X1" id="x1">I</div>
+			<div class="X1" id="x2">II</div>
+			<div class="X1" id="x3">III</div>
+			<div class="X1" id="x4">IV</div>
+			<div class="X1" id="x5">V</div>
+			<div class="X1" id="x6">VI</div>
+			<div class="X1" id="x7">VII</div>
+			<div class="X1" id="x8">VIII</div>
+			<div class="X1" id="x9">IX</div>
+			<div class="X1" id="x10">X</div>
+			<div class="X1" id="x11">XI</div>
+			<div class="X1" id="x12">XII</div>
+		</div>
+	<script>
+		//时钟js
+		function get_time() {
+			//获取系统时间
+			var t_time=new Date();
+			var t_hour=t_time.getHours();
+			var t_minute=t_time.getMinutes();
+			var t_second=t_time.getSeconds();
+			var c_h=t_hour/12*360; /*12小时一圈*/
+			var c_m=t_minute/60*360;
+			var c_s=t_second/60*360;
+			s1.innerHTML+=`
+				@keyframes turn0{
+					0%{
+						transform:rotate(${c_h}deg);
+					}
+					100%{
+						transform:rotate(${c_h+360}deg);
+					}
+				}
+				@keyframes turn1{
+					0%{
+						transform:rotate(${c_m}deg);
+					}
+					100%{
+						transform:rotate(${c_m+360}deg);
+					}
+				}
+				@keyframes turn2{
+					0%{
+						transform:rotate(${c_s}deg);
+					}
+					100%{
+						transform:rotate(${c_s+360}deg);
+					}
+				}`
+		}
+	</script>
+ </body>
+</html>
