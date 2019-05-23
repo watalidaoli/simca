@@ -1,2 +1,1 @@
 # simca
-my project
